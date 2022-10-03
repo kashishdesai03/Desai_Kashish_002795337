@@ -4,6 +4,7 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Employee;
 import model.EmployeeHistory;
@@ -269,6 +270,28 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void buttonViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = tblEmployee.getSelectedRow();
+        
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        Employee selectedEmployee = (Employee) model.getValueAt(selectedRowIndex, 0);
+        
+        txtName.setText(selectedEmployee.getName());
+        txtId.setText(selectedEmployee.getEmployeeId());
+        txtAge.setText(selectedEmployee.getAge());
+        txtGender.setText(selectedEmployee.getGender());
+        txtStartDate.setText(selectedEmployee.getStartDate());
+        txtLevel.setText(selectedEmployee.getLevel());
+        txtTeamInfo.setText(selectedEmployee.getTeamInfo());
+        txtPosition.setText(selectedEmployee.getPosition());
+        txtCellNo.setText(selectedEmployee.getCellNo());
+        txtEmail.setText(selectedEmployee.getEmail());
+        txtPhoto.setText(selectedEmployee.getPhoto());
     }//GEN-LAST:event_buttonViewActionPerformed
 
     private void txtTeamInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTeamInfoActionPerformed
@@ -293,6 +316,22 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = tblEmployee.getSelectedRow();
+        
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        Employee selectedEmployee = (Employee) model.getValueAt(selectedRowIndex, 0);
+        
+        history.deleteEmployee(selectedEmployee);
+        
+        JOptionPane.showMessageDialog(this, "Employee deleted");
+        
+        populateTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 
@@ -334,7 +373,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         for (Employee e : history.getHistory()) {
             
             Object[] row = new Object[11];
-            row[0] = e.getName();
+            row[0] = e;
             row[1] = e.getEmployeeId();
             row[2] = e.getAge();
             row[3] = e.getGender();
