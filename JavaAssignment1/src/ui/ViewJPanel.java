@@ -64,6 +64,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         txtAge = new javax.swing.JTextField();
         startDate = new javax.swing.JLabel();
         txtGender = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
 
         jScrollPane1.setSize(new java.awt.Dimension(900, 900));
 
@@ -87,6 +88,11 @@ public class ViewJPanel extends javax.swing.JPanel {
             }
         });
         tblEmployee.setSize(new java.awt.Dimension(300, 70));
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEmployee);
 
         buttonView.setText("View");
@@ -159,19 +165,28 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         startDate.setText("Start Date");
 
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonView, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -219,7 +234,8 @@ public class ViewJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonView, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,11 +350,51 @@ public class ViewJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        int i = tblEmployee.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)tblEmployee.getModel();
+        
+        if(i>=0) {
+            model.setValueAt(txtName.getText(), i, 0);
+            model.setValueAt(txtId.getText(), i, 1);
+            model.setValueAt(txtAge.getText(), i, 2);
+            model.setValueAt(txtGender.getText(), i, 3);
+            model.setValueAt(txtStartDate.getText(), i, 4);
+            model.setValueAt(txtLevel.getText(), i, 5);
+            model.setValueAt(txtTeamInfo.getText(), i, 6);
+            model.setValueAt(txtPosition.getText(), i, 7);
+            model.setValueAt(txtCellNo.getText(), i, 8);
+            model.setValueAt(txtEmail.getText(), i, 9);
+            model.setValueAt(txtPhoto.getText(), i, 10);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        // TODO add your handling code here:
+        
+        int selectedRow = tblEmployee.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)tblEmployee.getModel();
+        txtName.setText(model.getValueAt(selectedRow,0).toString());
+        txtId.setText(model.getValueAt(selectedRow,1).toString());
+        txtAge.setText(model.getValueAt(selectedRow,2).toString());
+        txtGender.setText(model.getValueAt(selectedRow,3).toString());
+        txtStartDate.setText(model.getValueAt(selectedRow,4).toString());
+        txtLevel.setText(model.getValueAt(selectedRow,5).toString());
+        txtTeamInfo.setText(model.getValueAt(selectedRow,6).toString());
+        txtPosition.setText(model.getValueAt(selectedRow,7).toString());
+        txtCellNo.setText(model.getValueAt(selectedRow,8).toString());
+        txtEmail.setText(model.getValueAt(selectedRow,9).toString());
+        txtPhoto.setText(model.getValueAt(selectedRow,10).toString());
+    }//GEN-LAST:event_tblEmployeeMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Name1;
     private javax.swing.JLabel age2;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton buttonView;
     private javax.swing.JLabel cellNo;
     private javax.swing.JLabel email;
