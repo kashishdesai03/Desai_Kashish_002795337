@@ -280,6 +280,19 @@ public class CreateJPanel extends javax.swing.JPanel {
         String image = txtPhoto.getText();
         image = image.replace("\\", "\\\\");
         
+        //Data Validation
+        
+        if(name.equals("") || employeeId.equals("") || age.equals("") || gender.equals("") || startDate.equals("") || level.equals("") || teamInfo.equals("") || position.equals("") || cellNo.equals("") || email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Empty fields");
+            return;
+        }
+        
+        if(cellNo.length()!=10) {
+            JOptionPane.showMessageDialog(this, "Cell Number is invalid");
+            return;
+        }
+        
+        
         Employee e = history.addNewEmployee();
         
         e.setName(name);
